@@ -36,3 +36,22 @@ class Solution2:
                 window.remove(s[i])
                 i += 1
         return max_len
+
+
+# Sliding Window Optimized
+# Time complexity : O(n)
+# Space complexity (HashMap) : O(min(m, n))
+# Space complexity (Table): O(m)
+class Solution3:
+    def lengthOfLongestSubstring(self, s: str) -> int:
+        max_len = 0
+        i = 0
+        j = 0
+        smap = {}
+        while j < len(s):
+            if s[j] in smap:
+                i = smap[s[j]] if smap[s[j]] > i else i
+            max_len = j - i + 1 if j - i + 1 > max_len else max_len
+            smap[s[j]] = j + 1
+            j += 1
+        return max_len
