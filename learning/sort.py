@@ -79,10 +79,30 @@ def quick_sort(l: list):
     return quick_sort(left) + [l[0], ] + quick_sort(right)
 
 
+def counting_sort(l: list):
+    if len(l) <= 1:
+        return l
+    rl = [None] * len(l)
+    for i in range(len(l)):
+        small = 0
+        same = 0
+        for j in range(len(l)):
+            if l[j] < l[i]:
+                small += 1
+            elif l[j] == l[i]:
+                same += 1
+
+        for k in range(small, small + same):
+            rl[k] = l[i]
+
+    return rl
+
+
 if __name__ == '__main__':
     # ll = bubble_sort(myList)
     # ll = selection_sort(myList)
     # ll = insertion_sort(myList)
     # ll = merge_sort(myList)
-    ll = quick_sort(myList)
+    # ll = quick_sort(myList)
+    ll = counting_sort(myList)
     print(ll)
